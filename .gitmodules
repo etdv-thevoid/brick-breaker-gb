@@ -1,0 +1,6 @@
+[submodule "libraries/hardware.inc"]
+	path = libraries/hardware.inc
+	url = https://github.com/gbdev/hardware.inc.git
+[submodule "libraries/gbc-engine-core"]
+	path = libraries/gbc-engine-core
+	url = https://github.com/etdv-thevoid/gbc-engine-core.git
