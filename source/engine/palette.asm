@@ -4,44 +4,20 @@ INCLUDE "includes/includes.inc"
 SECTION "Color Palette Functions", ROM0
 
 /*
-Increments and updates the current color palette
-*/
-_IncrementPalette::
-    ld hl, wColorPaletteCurrent
-    ld a, OAMF_PALMASK
-    inc [hl]
-    and a, [hl]
-    ld [hl], a
-    ; fallthrough
-
-/*
 Sets background palette 0
 */
 _LoadPalette::
     call _IsGBColor
-    jp z, _LoadPaletteMonochrome
-    ; fallthrough
+    jr z, .monochrome
 
-/*
-Sets background palette 0 - Color
-*/
-_LoadPaletteColor:
-    ld a, [wColorPaletteCurrent]
-    ld hl, _DefaultPaletteColors
-    ld b, NUMBER_OF_PALLETE_BYTES
-    ld c, NUMBER_OF_PALLETE_COLORS
-    call _DataTable
+.color:
+    ld hl, _DefaultPalette
+    call _SetBackgroundPaletteAll
+    
+    ld hl, _DefaultPalette
+    call _SetSpritePaletteAll
 
-    xor a
-    jp _SetBackgroundPalette
-
-/*
-Sets background palette 0 - Monochrome
-*/
-_LoadPaletteMonochrome:
-    ld a, [wColorPaletteCurrent]
-    and a, TRUE
-    jp nz, _SetDMGPalettesInverted
+.monochrome:
     jp _SetDMGPalettesDefault
 
 
@@ -57,16 +33,8 @@ Simple default palette colors
 - Cyan
 - Magenta
 */
-_DefaultPaletteColors:
+_DefaultPalette:
     INCLUDE "assets/palettes/default.pal"
 .end:
-
-ENDSECTION
-
-
-SECTION "Color Palette Variables", WRAM0
-
-wColorPaletteCurrent:
-    DB
 
 ENDSECTION

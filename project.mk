@@ -2,17 +2,17 @@
 # You can override variables set in the Makefile here.
 
 # ROM name
-ROMNAME := gbc-engine-core
+ROMNAME := brick-breaker
 ROMEXT  := gb
 
 # Value that the ROM will be filled with.
 PADVALUE := 0xFF
 
 # Game title, up to 11 ASCII chars.
-TITLE := GBC-ENGINE-
+TITLE := BRICK-BREAK
 
 # 4-ASCII letter game ID.
-GAMEID := CORE
+GAMEID := VOID
 
 # ROM version (typically starting at 0 and incremented for each published version).
 VERSION := 0x00

@@ -1,23 +1,9 @@
-; palette 0 - Greyscale
-    rgb_palette #000000, #555555, #AAAAAA, #FFFFFF
-
-; palette 1 - Red
-    rgb_palette #000000, #550000, #AA0000, #FF0000
-
-; palette 2 - Green
-    rgb_palette #000000, #005500, #00AA00, #00FF00
-
-; palette 3 - Blue
-    rgb_palette #000000, #000055, #0000AA, #0000FF
-
-; palette 4 - Yellow
-    rgb_palette #000000, #555500, #AAAA00, #FFFF00
-    
-; palette 5 - Orange
-    rgb_palette #000000, #552A00, #AA5500, #FF7F00
-    
-; palette 6 - Cyan
-    rgb_palette #000000, #005555, #00AAAA, #00FFFF
-    
-; palette 7 - Magenta
-    rgb_palette #000000, #550055, #AA00AA, #FF00FF
+; Default palette
+    rgb_palette #FFFFFF, #AAAAAA, #555555, #151515
+    rgb_palette #FF5555, #AA2A2A, #551515, #151515
+    rgb_palette #55FF55, #2AAA2A, #155515, #151515
+    rgb_palette #5555FF, #2A2AAA, #151555, #151515
+    rgb_palette #FFFF55, #AAAA2A, #555515, #151515
+    rgb_palette #FF7F55, #AA552A, #552A15, #151515
+    rgb_palette #55FFFF, #2AAAAA, #155555, #151515
+    rgb_palette #FF55FF, #AA2AAA, #551555, #151515

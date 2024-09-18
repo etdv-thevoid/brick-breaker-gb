@@ -4,13 +4,41 @@ INCLUDE "includes/includes.inc"
 SECTION "Tilemap Functions", ROM0
 
 /*
+Load attrmap into SCRN1.
+
+Input:
+- `hl` = Pointer to rle compressed attrmap data
+*/
+_LoadAttrmapSCRN1::
+    call _IsGBColor
+    ret z
+
+    ld a, 1
+    ld de, vSCRN1
+    jr _LoadTilemap
+
+/*
+Load attrmap into SCRN0.
+
+Input:
+- `hl` = Pointer to rle compressed attrmap data
+*/
+_LoadAttrmapSCRN0::
+    call _IsGBColor
+    ret z
+    
+    ld a, 1
+    ld de, vSCRN0
+    jr _LoadTilemap
+
+/*
 Load tilemap into SCRN1.
 
 Input:
-- `a` = VRAM bank
 - `hl` = Pointer to rle compressed tilemap data
 */
-_LoadFontTilesSCRN1::
+_LoadTilemapSCRN1::
+    xor a
     ld de, vSCRN1
     jr _LoadTilemap
 
@@ -18,10 +46,10 @@ _LoadFontTilesSCRN1::
 Load tilemap into SCRN0.
 
 Input:
-- `a` = VRAM bank
 - `hl` = Pointer to rle compressed tilemap data
 */
 _LoadTilemapSCRN0::
+    xor a
     ld de, vSCRN0
     ; fallthrough
 

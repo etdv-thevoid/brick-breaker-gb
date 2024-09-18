@@ -16,8 +16,8 @@ As an example, the following function implements a simple
 finite state machine loop. 
 */
 _Main::
-    ; Load font tiles
-    call _LoadFontTilesBLK2
+    ; Load tileset
+    call _LoadTileset
 
     ; Load palette colors
     call _LoadPalette
@@ -30,17 +30,6 @@ _Main::
     ld a, IEF_VBLANK
     ldh [rIE], a
 
-    ; fallthrough
-
-_MainStateLoop:
-    ; Anything below will be executed each time the main state changes!
-
-    ; Turn off the screen
-    call _ScreenOff
-
-    ; Disable Interrupts
-    di
-
     ; Reset VBlank Interrupt Handler function to default
     ld bc, _MainStateVBlankHandler
     rst _SetVBLHandler
@@ -48,6 +37,12 @@ _MainStateLoop:
     ; Enable Interrupts
     ei
 
+    ; fallthrough
+
+_MainStateLoop:
+    ; Turn off the screen when switching states
+    call _ScreenOff
+    
     ; Jump to current main state's function
     ld a, [wMainStateCurrent]
     ld c, NUMBER_OF_MAIN_STATES
@@ -67,8 +62,10 @@ _MainStateLoop:
 Banked Jump Table for each main state
 */
 _MainStateJumpTable:
-    DB BANK(xHelloWorld)
-    DW xHelloWorld
+    DB BANK(xTitle)
+    DW xTitle
+    DB BANK(xGame)
+    DW xGame
     ASSERT (@ - _MainStateJumpTable == NUMBER_OF_MAIN_STATES * SIZE_OF_ADDRESS_TABLE_BANKED)
 
 
