@@ -198,6 +198,9 @@ _UpdateBall_PaddleCollision_Vertical:
     inc a
     ld [wBallVelocityY], a
 
+    ld a, SOUND_EFFECT_JUMP
+    call _PlaySound
+
     ld a, TRUE
     and a
     ret
@@ -259,6 +262,9 @@ _UpdateBall_BackgroundCollision_Horizontal:
     ret
 
 .collision:
+    ld a, SOUND_EFFECT_JUMP
+    call _PlaySound
+
     ld a, TRUE
     and a
     ret
@@ -316,6 +322,9 @@ _UpdateBall_BackgroundCollision_Vertical:
     ret
 
 .collision:
+    ld a, SOUND_EFFECT_JUMP
+    call _PlaySound
+
     ld a, TRUE
     and a
     ret
@@ -333,7 +342,7 @@ _UpdateBall_Sprite:
     ld a, 2
     ld [hl+], a
 
-    ld a, PALETTE_COLOR_MAGENTA
+    ld a, PALETTE_COLOR_WHITE
     ld [hl+], a
 
     ret
@@ -357,19 +366,28 @@ _DeleteBrick:
     pop hl
 
 .monochrome:
+    push hl
     xor a
     ld b, 2
     ld d, $FF
     call _VideoMemSetFast
+
+    ld a, SOUND_EFFECT_PERCUSSION
+    call _PlaySound
+    pop hl
     ; fallthrough
 
 
 _GetPointsValue:
-    ld a, [wBallPositionYAdjusted]
-    sub a, OAM_Y_OFS
-    cp a, 40
+REPT 5
+    srl h
+    rr l
+ENDR
+    ld a, l
+    and a, %0001_1111
+    cp a, 5
     jr nc, .add1
-    cp a, 24
+    cp a, 3
     jr nc, .add2
     
 .add3:

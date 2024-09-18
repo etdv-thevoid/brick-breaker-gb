@@ -86,6 +86,9 @@ xGameInit:
     
     ld a, LCDC_DEFAULT
     call _ScreenOn
+    
+    ld a, SOUND_EFFECT_COIN_2
+    call _PlaySound
 
     ld a, GAME_STATE_RESET
     jp xGameStateNew
@@ -119,6 +122,9 @@ xGameReset:
 
     call _StartBall
 
+    ld a, SOUND_EFFECT_JUMP
+    call _PlaySound
+
     ld a, GAME_STATE_PLAY
     jp xGameStateNew
 
@@ -147,6 +153,9 @@ xGamePlay:
     
     ld a, GAME_STATE_OVER
     jp z, xGameStateNew
+    
+    ld a, SOUND_EFFECT_GAME_OVER
+    call _PlaySound
 
     ld a, GAME_STATE_RESET
     jp xGameStateNew
@@ -168,12 +177,20 @@ xGameNext:
     ld hl, xGameStateTilemap
     call _LoadTilemapSCRN0
 
+    ld a, SOUND_EFFECT_COIN
+    call _PlaySound
+
     ld a, GAME_STATE_RESET
     jp xGameStateNew
 
 
 xGameOver:
     call xDrawGameOverString
+
+    ld a, SOUND_EFFECT_GAME_OVER
+    call _PlaySound
+
+    call _SaveHighScore
 
 .loop:
     call _WaitForVBLInterrupt
@@ -197,22 +214,22 @@ xDrawPressAString:
     xor a
     ld hl, xGameStatePressAString
     ld b, (xGameStatePressAString.end - xGameStatePressAString)
-    ld de, vSCRN0.y8x2
+    ld de, vSCRN0.y8x3
     jp _VideoMemCopyFast
 
 xGameStatePressAString:
-    DB " Press A! "
+    DB $08, $09, $0A, $0B, $0C, $0D, $0E, $0F
 .end:
 
 xDrawGameOverString:
     xor a
     ld hl, xGameStateGameOverString
     ld b, (xGameStateGameOverString.end - xGameStateGameOverString)
-    ld de, vSCRN0.y8x1
+    ld de, vSCRN0.y8x2
     jp _VideoMemCopyFast
 
 xGameStateGameOverString:
-    DB " GAME OVER! "
+    DB $16, $17, $18, $19, $1A, $1B, $1C, $1D, $1E, $1F
 .end:
 
 xGameStateTilemap:

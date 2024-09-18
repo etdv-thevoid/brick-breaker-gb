@@ -8,7 +8,7 @@ xTitle::
     ld b, (OAM_COUNT * 4)
     xor a
     call _MemSetFast
-    
+
     ; Load Tilemap
     ld hl, xTitleStateTilemap
     call _LoadTilemapSCRN0
@@ -16,6 +16,9 @@ xTitle::
     ; Load Attrmap
     ld hl, xTitleStateAttrmap
     call _LoadAttrmapSCRN0
+
+    ld a, SOUND_EFFECT_COIN
+    call _PlaySound
 
     ld a, LCDC_DEFAULT
     call _ScreenOn

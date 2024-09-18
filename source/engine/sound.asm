@@ -20,6 +20,7 @@ Pointer Table for each sound effect
 */
 _SoundEffectsPointerTable:
     DW _SfxCoin
+    DW _SfxCoin2
     DW _SfxGameOver
     DW _SfxJump
     DW _SfxPercussion
@@ -30,6 +31,12 @@ Simple coin collect jingle
 */
 _SfxCoin:
     INCLUDE "assets/sound_effects/coin.sfx"
+
+/*
+Simple coin collect jingle
+*/
+_SfxCoin2:
+    INCLUDE "assets/sound_effects/coin_2.sfx"
 
 /*
 Simple game over sting

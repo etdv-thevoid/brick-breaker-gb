@@ -11,7 +11,19 @@ _LoadHighScore::
 
 
 _SaveHighScore::
-    ld hl, wHighScore
+    ld de, wCurrentScore+1
+    ld hl, wHighScore+1
+
+    ld a, [de]
+    sub a, [hl]
+    ret c
+    dec de
+    dec hl
+    ld a, [de]
+    sub a, [hl]
+    ret c
+
+    ld hl, wCurrentScore
     ld bc, 2
     ld de, sHighScore
     jp _SaveToSRAM
