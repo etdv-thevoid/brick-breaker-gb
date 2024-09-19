@@ -1,17 +1,14 @@
-[![CI](https://github.com/etdv-thevoid/gbc-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/etdv-thevoid/gbc-engine/actions/workflows/ci.yml)
+# Brick Breaker GB
+
+A simple brick breaker clone made for the Game Boy (Color)
+
+![TitleScreen](./images/screenshot_0.bmp)
+![GamePlay](./images/screenshot_1.bmp)
 
 
-# Game Boy (Color) Engine
+## GBC-Engine
 
-A quick and dirty Game Boy (Color) engine template for homebrew games
-
-![HelloWorld](./images/screenshot_0.png)
-![CrashScreen](./images/screenshot_1.png)
-
-
-## See Also
-
-This repository is part of my Game Boy (Color) Engine project:
+This game was made using my Game Boy (Color) Engine project:
 
 - [GBC Engine](https://github.com/etdv-thevoid/gbc-engine)
 - [GBC Engine - Core](https://github.com/etdv-thevoid/gbc-engine-core)
